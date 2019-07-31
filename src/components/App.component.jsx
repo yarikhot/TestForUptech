@@ -14,7 +14,7 @@ class App extends PureComponent {
       <div className="App">
         <Switch>
           <Route exact path={routes.firstStep} component={FirstStep} />
-          <Route exact path={routes.secondStep} component={SecondStep} />
+          <Route path={routes.secondStep} component={SecondStep} />
           <Route exact path={routes.help} component={Help} />
           <Route exact path={routes.successful} component={Successful} />
           <Redirect to={routes.firstStep} />

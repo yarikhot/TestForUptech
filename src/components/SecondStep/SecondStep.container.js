@@ -2,16 +2,16 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import SecondStep from './SecondStep.component';
-import { setCode } from './SecondStep.actions';
+import { setFirstStep } from '../FirstStep/FirstStep.actions';
 import { reset } from '../../commonActions/commonActions';
 
 const mapStateToProps = store => ({
-  firstStep: store.data,
+  code: store.data.code,
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { setCode, reset }
+    { setFirstStep, reset }
   )(SecondStep)
 );

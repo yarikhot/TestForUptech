@@ -19,10 +19,10 @@ const data = handleActions(
         [payload.name]: payload.value,
       };
     },
-    [RESET](state, { payload }) {
+    [RESET](state, { name }) {
       return {
         ...state,
-        [payload]: '',
+        [name]: '',
       };
     },
   },

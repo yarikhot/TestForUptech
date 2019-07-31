@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import { Prompt } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import { routes } from '../../config/routes';
+import Header from '../Header/Header';
 
 class FirstStep extends Component {
+  state = {
+    error: '',
+    nextRoute: '',
+  };
+
   handleChange = ({ target: { name, value } }) => {
     const { setFirstStep } = this.props;
     setFirstStep({ name, value });
@@ -12,15 +19,35 @@ class FirstStep extends Component {
     const {
       country,
       history: { push },
+      card,
     } = this.props;
 
-    push(`${routes.secondStep_panh_name}/${country}`);
+    if (card.replace(/ /g, '').length === 16) {
+      push(`${routes.secondStep_panh_name}/${country}`);
+    } else {
+      this.setState({ error: 'Please, enter correcr card number' });
+    }
   };
+
+  componentWillUnmount() {
+    const { reset } = this.props;
+    const { nextRoute } = this.state;
+    if (nextRoute.includes('secondStep')) reset('card');
+  }
 
   render() {
     const { country, card } = this.props;
+    const { error } = this.state;
     return (
       <div className="page">
+        <Prompt
+          when={!!card}
+          message={location => {
+            this.setState({ nextRoute: location.pathname });
+            return location.pathname.includes('secondStep') || 'If you leave this page, your shanges will be lost';
+          }}
+        />
+        <Header />
         <h1 className="title">Step 1</h1>
         <div className="inputBox">
           <h2 className="input__title">Card Number</h2>
@@ -32,6 +59,7 @@ class FirstStep extends Component {
             name="card"
             onChange={this.handleChange}
           />
+          <p style={{ color: 'red' }}>{error}</p>
         </div>
         <div className="inputBox">
           <h2 className="input__title">Select country</h2>
