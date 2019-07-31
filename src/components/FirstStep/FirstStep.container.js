@@ -3,14 +3,16 @@ import { withRouter } from 'react-router-dom';
 
 import FirstStep from './FirstStep.component';
 import { setFirstStep } from './FirstStep.actions';
+import { reset } from '../../commonActions/commonActions';
 
 const mapStateToProps = store => ({
-  step1: store.step1,
+  card: store.data.card,
+  country: store.data.country,
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { setFirstStep }
+    { setFirstStep, reset }
   )(FirstStep)
 );

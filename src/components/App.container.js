@@ -4,7 +4,7 @@
 // import App from './App.component';
 
 // const mapStateToProps = store => ({
-//   step1: store.step1,
+//   firstStep: store.firstStep,
 // });
 
 // export default withRouter(connect(mapStateToProps)(App));

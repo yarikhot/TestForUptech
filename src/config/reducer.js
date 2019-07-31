@@ -1,22 +1,36 @@
 import { handleActions } from 'redux-actions';
 import { combineReducers } from 'redux';
 import { SET_FIRST_STEP } from '../components/FirstStep/FirstStep.actions';
+import { RESET } from '../commonActions/commonActions';
 
 const initialState = {
-  step1: {},
+  data: {
+    card: '',
+    country: 'Ukraine',
+    code: '',
+  },
 };
 
-const step1 = handleActions(
+const data = handleActions(
   {
     [SET_FIRST_STEP](state, { payload }) {
-      return {};
+      return {
+        ...state,
+        [payload.name]: payload.value,
+      };
+    },
+    [RESET](state, { payload }) {
+      return {
+        ...state,
+        [payload]: '',
+      };
     },
   },
-  initialState.step1
+  initialState.data
 );
 
 const rootReducer = combineReducers({
-  step1,
+  data,
 });
 
 export default rootReducer;
