@@ -11,8 +11,8 @@ class FirstStep extends Component {
   };
 
   handleChange = ({ target: { name, value } }) => {
-    const { setFirstStep } = this.props;
-    setFirstStep({ name, value });
+    const { setData } = this.props;
+    setData({ name, value });
   };
 
   handleSave = () => {
@@ -29,24 +29,20 @@ class FirstStep extends Component {
     }
   };
 
-  componentWillUnmount() {
+  handleExit = location => {
     const { reset } = this.props;
-    const { nextRoute } = this.state;
-    if (nextRoute.includes('secondStep')) reset('card');
-  }
 
+    if (location.pathname.includes('help')) {
+      reset('card');
+    }
+    return location.pathname.includes('secondStep') || 'If you leave this page, your shanges will be lost';
+  };
   render() {
     const { country, card } = this.props;
     const { error } = this.state;
     return (
       <div className="page">
-        <Prompt
-          when={!!card}
-          message={location => {
-            this.setState({ nextRoute: location.pathname });
-            return location.pathname.includes('secondStep') || 'If you leave this page, your shanges will be lost';
-          }}
-        />
+        <Prompt when={!!card} message={this.handleExit} />
         <Header />
         <h1 className="title">Step 1</h1>
         <div className="inputBox">

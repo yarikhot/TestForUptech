@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import FirstStep from './FirstStep.component';
-import { setFirstStep } from './FirstStep.actions';
+import { setData } from './FirstStep.actions';
 import { reset } from '../../commonActions/commonActions';
 
 const mapStateToProps = store => ({
@@ -13,6 +13,6 @@ const mapStateToProps = store => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { setFirstStep, reset }
+    { setData, reset }
   )(FirstStep)
 );
