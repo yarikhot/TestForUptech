@@ -34,9 +34,11 @@ class FirstStep extends Component {
 
     if (location.pathname.includes('help')) {
       reset('card');
+      reset('country');
     }
     return location.pathname.includes('secondStep') || 'If you leave this page, your shanges will be lost';
   };
+
   render() {
     const { country, card } = this.props;
     const { error } = this.state;

@@ -22,7 +22,7 @@ const data = handleActions(
     [RESET](state, { name }) {
       return {
         ...state,
-        [name]: '',
+        [name]: initialState.data[name],
       };
     },
   },
